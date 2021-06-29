@@ -6,7 +6,7 @@ import lombok.Data;
  *  1件分の郵便番号情報
  */
 @Data
-public class ZipCodeDara {
+public class ZipCodeData {
 	
 	/** 郵便番号 */
 	private String zipcode;
