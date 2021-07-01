@@ -68,15 +68,31 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1 style="font-family: 'メイリオ'">住所検索画面</h1>
-			<h2 style="font-family: 'メイリオ'">郵便番号</h2>
-			<h3 style="font-family: 'メイリオ'">検索結果</h3>
-			<!-- 基本１件だが、API構造に従い繰り返し構文とする -->
-			<ul th:each="result : ${zipCodeEntity.results}" th:object="${result}">
-				<li><span th:text="*{zipcode}"></span></li>
-				<li><span th:text="*{address1}"></span><span th:text="*{address2}"></span><span th:text="*{address3}"></span></li>
-				<li><span th:text="*{kana1}"></span><span th:text="*{kana2}"></span><span th:text="*{kana3}"></span></li>
+			<h2 style="font-family: 'メイリオ'">タスク管理</h2>
+			
+			<hr>
+			<form method="post" th:action="@{/task/insert}">
+				<div class="input-group">
+					<input type="text" class="from-control" name="comment" placeholder="タスク内容">
+					<input type="date" class="from-control" name="limitday">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-warning">追加</button>
+					</span>
+				</div>
+			</form>
+			<hr>
+			<ul th:each="task : ${taskEntity.tasklist}">
+				<li>
+					<a th:href="@{'/task/delete/' + ${task.id}">
+						<span th:text="${tasklist.comment}"></span>
+					</a>
+					<span th:text="${tasklist.limitday}"></span>
+				</li>
 			</ul>
+			<hr>
+			<form method="post" th:action="@{/task/csv}">
+				<button type="submit" class="btn btn-info">CSV出力</button>
+			</form>
 		</div>
 	</div>
 

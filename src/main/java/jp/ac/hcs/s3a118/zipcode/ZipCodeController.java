@@ -29,6 +29,10 @@ public class ZipCodeController {
 		model.addAttribute("zipCodeEntity", zipCodeEntity);
 		log.info("[" + principal.getName() + "]住所検索：" + zipcode);
 		
+		if (zipcode == "") {
+			return "index";
+		}
+		
 		return "zipcode/zipcode";
 	}
 }
