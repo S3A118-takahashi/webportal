@@ -54,6 +54,18 @@ public class TaskService {
 		return count > 0;
 	}
 	
+	private TaskData refillToData(String user_id, String comment, String limitday) {
+		TaskData data = new TaskData();
+		data.setUser_id(user_id);
+		data.setComment(comment);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			data.setLimitday(format.parse(limitday));
+		} catch(ParseException e) {
+			// 何もしない(入力チェック済みの為、変化エラーは起こりえない)
+		}
+		return data;
+	}
 
 	/**
 	 * タスク情報をCSVファイルとしてサーバに保存する.
@@ -77,17 +89,9 @@ public class TaskService {
 		return bytes;
 	}
 	
-	
-	private TaskData refillToData(String user_id, String comment, String limitday) {
-		TaskData data = new TaskData();
-		data.setUser_id(user_id);
-		data.setComment(comment);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			data.setLimitday(format.parse(limitday));
-		} catch(ParseException e) {
-			// 何もしない(入力チェック済みの為、変化エラーは起こりえない)
-		}
-		return data;
+	public boolean deleteOne(int id) {
+		//登録件数を取得する
+		int count = taskReposirory.deleteOne(id);
+		return count > 0;
 	}
 }

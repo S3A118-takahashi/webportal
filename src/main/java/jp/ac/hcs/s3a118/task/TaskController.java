@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -86,5 +88,26 @@ public class TaskController {
 
 		// CSVファイルを端末へ送信
 		return new ResponseEntity<byte[]>(bytes, header, HttpStatus.OK);
+	}
+	/**
+	 * 指定されたIDのタスクを削除する
+	 * @param id タスクID
+	 * @param principal ログイン情報
+	 * @param model 
+	 * @return 
+	 */
+	@GetMapping("/task/delete/{id}")
+	public String deleteOne(@PathVariable int id, Principal principal, Model model) {
+		
+		log.info("[" + principal.getName() + "]タスク削除");
+		boolean isSuccess = taskService.deleteOne(id);
+		if (isSuccess) {
+			log.info("成功");
+		}else {
+			log.info("失敗");
+		}
+		
+		return getTask(principal, model);
+		
 	}
 }

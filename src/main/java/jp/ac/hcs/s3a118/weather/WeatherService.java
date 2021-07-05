@@ -43,20 +43,18 @@ public class WeatherService {
 			// 変換クラスを生成し、文字列からjsonクラスへ変換する(例外の可能性あり)
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode node = mapper.readTree(json);
-			
+			WeatherData data = new WeatherData();
 			// forecast(配列)をForEachで配列分繰り返す
 			for(JsonNode forecast : node.get("forecasts")) {
-				WeatherData data = new WeatherData();
 				// dataLabelをDataクラスへ設定
 				data.setDateLabel(forecast.get("dateLabel").asText());
 				// telopをDateクラスへ設定
 				data.setTelop(forecast.get("telop").asText());
 				// DataクラスをEntityの配列に追加
 				weatherEntity.getForecasts().add(data);
-				
-				// descriptionをDataクラスへ設定
-				//data.setDescription(forecast.get("description").asText());
 			}
+			// descriptionをDataクラスへ設定
+			//data.setDescription(node.get("description").asText());
 			
 		} catch(IOException e) {
 			// 例外発生時は、エラーメッセージの詳細を標準エラー出力

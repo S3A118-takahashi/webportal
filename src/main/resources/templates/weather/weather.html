@@ -74,8 +74,8 @@
 			<ul th:each="forecast : ${weatherEntity.forecasts}">
 				<li><h4><span th:text="${forecast.dateLabel}"></span></h4></li>
 				<li><span th:text="${forecast.telop}"></span></li>
-				<li><samp th:text="${forecast.description}"></samp></li>
 			</ul>
+			<!-- <samp th:text="node : ${weatherEntity.description}"></samp> -->
 		</div>
 	</div>
 
