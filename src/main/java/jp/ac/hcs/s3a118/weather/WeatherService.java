@@ -54,7 +54,7 @@ public class WeatherService {
 				weatherEntity.getForecasts().add(data);
 			}
 			// descriptionをDataクラスへ設定
-			//data.setDescription(node.get("description").asText());
+			weatherEntity.setDescription(node.get("description").get("text").asText());
 			
 		} catch(IOException e) {
 			// 例外発生時は、エラーメッセージの詳細を標準エラー出力

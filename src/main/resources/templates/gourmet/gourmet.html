@@ -35,6 +35,7 @@
 	href="../static/css/ress.css">
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
+<script th:src="@{/js/shop.js}"></script>
 
 </head>
 
@@ -68,14 +69,17 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1 style="font-family: 'メイリオ'">札幌の天気予報</h1>
-			<p style="font-family: 'メイリオ'">（詳細）</p>
-			
-			<ul th:each="forecast : ${weatherEntity.forecasts}">
-				<li><h4><span th:text="${forecast.dateLabel}"></span></h4></li>
-				<li><span th:text="${forecast.telop}"></span></li>
+			<h1 style="font-family: 'メイリオ'">北海道グルメ</h1>
+			<h3>
+				「<span th:text="${SearchWord}"></span>」の検索結果
+			</h3>
+			<ul th:each="result : ${shopEntity.results}" th:object="${result}">
+				<li><img class="shopimage" th:src="${result.logo_image}"></li>
+				<li><a th:href="${result.url}" target="new"><span th:text="${result.name}"></span></a></li>
+				<li><a th:href="`https://www.google.com/maps/dir/?api=1&origin=${latlng}&destination=' + ${result.access}"
+				 target="new"><span th:text="${result.address}"></span></a></li>
+				<li><span th:text="${result.access}"></span></li>
 			</ul>
-			<span th:text="${weatherEntity.description}"></span>
 		</div>
 	</div>
 

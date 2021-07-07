@@ -74,7 +74,7 @@ public class TaskReposirory {
 	 * @return 削除データ数
 	 * @throws DataAccessException
 	 */
-	public int deleteOne(int id) throws DataAccessException {
+	public int deleteTask(int id) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_DELETE_ONE, id);
 		return rowNumber;
 	}

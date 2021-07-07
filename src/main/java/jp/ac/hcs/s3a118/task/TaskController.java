@@ -97,14 +97,14 @@ public class TaskController {
 	 * @return 
 	 */
 	@GetMapping("/task/delete/{id}")
-	public String deleteOne(@PathVariable int id, Principal principal, Model model) {
+	public String deleteTask(@PathVariable("id") int id, Principal principal, Model model) {
 		
 		log.info("[" + principal.getName() + "]タスク削除");
-		boolean isSuccess = taskService.deleteOne(id);
+		boolean isSuccess = taskService.deleteTask(id);
 		if (isSuccess) {
-			log.info("成功");
+			model.addAttribute("message","正常に削除されました。");
 		}else {
-			log.info("失敗");
+			model.addAttribute("errorMessage","削除できませんでした。再度操作をやり直してください");
 		}
 		
 		return getTask(principal, model);

@@ -88,10 +88,20 @@ public class TaskService {
 		byte[] bytes = Files.readAllBytes(p);
 		return bytes;
 	}
-	
-	public boolean deleteOne(int id) {
+	/**
+	 * 指定されたIDのタスクを削除する
+	 * @param id タスクID
+	 * @return
+	 */
+	public boolean deleteTask(int id) {
 		//登録件数を取得する
-		int count = taskReposirory.deleteOne(id);
+		int count;
+		try {
+			count = taskReposirory.deleteTask(id);
+		}catch(DataAccessException e) {
+			e.printStackTrace();
+			count = 0;
+		}
 		return count > 0;
 	}
 }
