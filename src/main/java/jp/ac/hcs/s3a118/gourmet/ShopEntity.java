@@ -12,12 +12,9 @@ import lombok.Data;
 @Data
 public class ShopEntity {
 	
+	private String shopname;
+	
 	/** 郵便番号情報のリスト */
 	private List<ShopData> results = new ArrayList<ShopData>();
-
-	public String setSearchWord(String shopname) {
-		// TODO 自動生成されたメソッド・スタブ
-		return shopname;
-	}
 	
 }

@@ -71,13 +71,14 @@
 		<div class="content-box">
 			<h1 style="font-family: 'メイリオ'">北海道グルメ</h1>
 			<h3>
-				「<span th:text="${SearchWord}"></span>」の検索結果
+				「<span th:text="${shopEntity.shopname}"></span>」の検索結果
 			</h3>
 			<ul th:each="result : ${shopEntity.results}" th:object="${result}">
 				<li><img class="shopimage" th:src="${result.logo_image}"></li>
 				<li><a th:href="${result.url}" target="new"><span th:text="${result.name}"></span></a></li>
-				<li><a th:href="`https://www.google.com/maps/dir/?api=1&origin=${latlng}&destination=' + ${result.access}"
-				 target="new"><span th:text="${result.address}"></span></a></li>
+				<li><a th:href="`https://www.google.com/maps/search/?api=1&query=' + ${result.access}"
+				 target="new"><span th:text="${result.address}"></span></a>
+				 </li>
 				<li><span th:text="${result.access}"></span></li>
 			</ul>
 		</div>

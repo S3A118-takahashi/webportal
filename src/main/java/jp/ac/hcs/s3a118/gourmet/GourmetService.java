@@ -35,7 +35,7 @@ public class GourmetService {
 		String json = restTemplate.getForObject(URL, String.class, API_KEY, shopname, large_service_area);
 		
 		ShopEntity shopEntity = new ShopEntity();
-		shopEntity.setSearchWord(shopname);
+		shopEntity.setShopname(shopname);
 		
 		// jsonクラスへの変換失敗の為、例外処理
 		try {
