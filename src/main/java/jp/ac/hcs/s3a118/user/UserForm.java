@@ -1,5 +1,6 @@
 package jp.ac.hcs.s3a118.user;
 
+import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -31,7 +32,7 @@ public class UserForm {
 	private String user_name;
 	
 	/** ダークモード */
-	@NotBlank(message = "{require_check}")
+	@AssertFalse(message = "{false_check}")
 	private boolean darkmode;
 	
 	/** 権限 */

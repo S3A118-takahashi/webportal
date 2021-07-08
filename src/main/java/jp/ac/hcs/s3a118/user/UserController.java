@@ -63,6 +63,15 @@ public class UserController {
 			return getUserInsert(form, model);
 		}
 		
+		log.info("[" + principal.getName() + "]ユーザ登録データ" + form.toString());
+		UserData data = userService.refillToData(form);
+		boolean result = userService.insertOne(data);
+		if(result) {
+			model.addAttribute("message", "ユーザを登録しました");
+		}else {
+			model.addAttribute("errorMessage", "ユーザ登録に失敗しました。操作をやり直してください。");
+		}
+		
 		
 		return getUserList(principal, model);
 	}
