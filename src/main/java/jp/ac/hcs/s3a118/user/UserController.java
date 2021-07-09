@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -76,4 +77,27 @@ public class UserController {
 		return getUserList(principal, model);
 	}
 	
+	/**
+	 * ユーザ詳細情報画面を表示する
+	 * @param user_id 検索するユーザID
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return ユーザ詳細情報画面
+	 */
+	@GetMapping("/user/detail/{id}")
+	public String getUserDetail(@PathVariable("id") String user_id,
+			Principal principal,
+			Model model) {
+		
+		if(user_id == "") {
+			return "user/detail";
+		}
+		//System.out.println("hcshcshcs:" + user_id);
+		UserData data = userService.getUserDetail(user_id);
+		//System.out.println(data);
+		log.info("[" + principal.getName() + "]ユーザデータ詳細");
+		model.addAttribute("userData", data);
+		
+		return "user/detail";
+	}
 }

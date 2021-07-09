@@ -66,5 +66,18 @@ public class UserService {
 		return data;
 	}
 	
-	
+	/**
+	 * ユーザを１件表示する
+	 */
+	public UserData getUserDetail(String user_id) {
+		UserData userData;
+		try {
+			userData = userRepository.selectOne(user_id);
+		} catch(DataAccessException e) {
+			e.printStackTrace();
+			userData = null;
+		}
+		return userData;
+		
+	}
 }
